@@ -1,40 +1,76 @@
-BoxLayout1:
 
+WindowManager:
+    BoxLayout1:
+    ScheduleView:
 
 <BoxLayout1>
-    orientation: "vertical"
+    name: "main"
+    BoxLayout
+
+
+        orientation: "vertical"
+        Label:
+            text: "John Doe"
+
+        BoxLayout:
+            Button:
+                text: "Schedule A"
+                disabled: root.empty_task
+                on_release:
+                    root.manager.transition.direction = "left"
+                    app.root.current = "taskView"
+            Label:
+                text:root.my_text
+                size_hint: 0.2, 1
+                font_name: "fonts/Lcd.ttf"
+
+            Button:
+                text: "Add Task"
+                size_hint: 0.2, 1
+                on_press: root.clicked()
+        BoxLayout:
+
+            Button:
+                text: "Schedule B"
+                disabled: root.empty_task
+                on_release:
+                    root.manager.transition.direction = "left"
+                    app.root.current = "taskView"
+            Label:
+                text:root.my_text
+                size_hint: 0.2, 1
+                font_name: "fonts/Lcd.ttf"
+
+            Button:
+                text: "Add Task"
+                size_hint: 0.2, 1
+                on_press: root.clicked()
+        BoxLayout:
+
+            Button:
+                text: "Schedule C"
+                disabled: root.empty_task
+                on_release:
+                    root.manager.transition.direction = "left"
+                    app.root.current = "taskView"
+            Label:
+                text:root.my_text
+                size_hint: 0.2, 1
+                font_name: "fonts/Lcd.ttf"
+
+            Button:
+                text: "Add Task"
+                size_hint: 0.2, 1
+                on_press: root.clicked()
+
+
+
+<ScheduleView>
+    name:"taskView"
     Label:
-        text: "John Doe"
-
-    BoxLayout:
-        Button:
-            text: "Schedule A"
-        Button:
-            text: "View"
-            size_hint: 0.2, 1
-        Button:
-            text: "Add"
-            size_hint: 0.2, 1
-    BoxLayout:
-        Button:
-            text: "Schedule B"
-        Button:
-            text: "View"
-            size_hint: 0.2, 1
-        Button:
-            text: "Add"
-            size_hint: 0.2, 1
-
-
-    BoxLayout:
-        Button:
-            text: "Schedule C"
-
-        Button:
-            text: "View"
-            size_hint: 0.2, 1
-        Button:
-            text: "Add"
-            size_hint: 0.2, 1
-
-<MainWidget>:
+        text: "You have this many task to complete"
+    Button:
+        text: "Go back"
+        on_release:
+            root.manager.transition.direction = "right"
+            app.root.current = "main"
