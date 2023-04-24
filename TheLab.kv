@@ -1,7 +1,9 @@
-
 WindowManager:
     BoxLayout1:
     ScheduleView:
+    Tasks:
+    AddTask:
+
 
 <BoxLayout1>
     name: "main"
@@ -18,6 +20,24 @@ WindowManager:
                 disabled: root.empty_task
                 on_release:
                     root.manager.transition.direction = "left"
+                    app.root.current = "tasksList"
+            Label:
+                text:root.my_text
+                size_hint: 0.2, 1
+                font_name: "fonts/Lcd.ttf"
+
+            Button:
+                text: "Add Task"
+                size_hint: 0.2, 1
+                on_press: root.clicked()
+                on_press: app.root.current = "taskView"
+        BoxLayout:
+
+            Button:
+                text: "Schedule B"
+                disabled: root.empty_task
+                on_release:
+                    root.manager.transition.direction = "left"
                     app.root.current = "taskView"
             Label:
                 text:root.my_text
@@ -31,8 +51,88 @@ WindowManager:
         BoxLayout:
 
             Button:
-                text: "Schedule B"
+                text: "Schedule C"
                 disabled: root.empty_task
+                on_release:
+                    root.manager.transition.direction = "left"
+                    app.root.current = "taskView"
+            Label:
+                text:root.my_text
+                size_hint: 0.2, 1
+                font_name: "fonts/Lcd.ttf"
+
+            Button:
+                text: "Add Task"
+                size_hint: 0.2, 1
+                on_press: root.clicked()
+
+
+
+<ScheduleView>
+    name:"taskView"
+    Label:
+        text: "You have this many task to complete"
+    Button:
+        text: "Go back"
+        on_release:
+            root.manager.transition.direction = "right"
+            app.root.current = "main"
+
+
+<Tasks>
+    name: "tasksList"
+    BoxLayout:
+        orientation: "vertical"
+        BoxLayout:
+            size_hint:1, 0.25
+            Label:
+                text: "These are the tasks for this schedule:"
+
+        BoxLayout:
+            orientation: "vertical"
+            Button:
+                on_release:
+                    app.root.current = "addTask"
+            Button:
+                text: "Not assigned"
+                on_release:root.date_picker()
+            Button:
+                text: "Not assigned"
+                on_release:root.date_picker()
+            Button:
+                text: "Not assigned"
+                on_release:root.date_picker()
+            Button:
+                text: "Back"
+                on_release:
+                    root.manager.transition.direction = "right"
+                    app.root.current = "main"
+
+
+<AddTask>
+    name:"addTask"
+    BoxLayout:
+        orientation: "vertical"
+        BoxLayout:
+            orientation: "vertical"
+            Label:
+                text: "Enter Task Name"
+            TextInput:
+                size_hint: 1, 0.2
+            Label:
+                text: "Enter Task Due Date"
+            TextInput:
+                id: task_dd
+                size_hint: 1, 0.2
+        BoxLayout:
+            orientation: "vertical"
+            size_hint: 1, 0.4
+            Button:
+                text: "Done"
+            Button:
+                text: "Back"
+                on_release:
+                    app.root.current = "tasksList"
                 on_release:
                     root.manager.transition.direction = "left"
                     app.root.current = "taskView"
