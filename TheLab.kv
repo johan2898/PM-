@@ -1,176 +1,226 @@
-WindowManager:
-    BoxLayout1:
-    ScheduleView:
-    Tasks:
-    AddTask:
+MainLayout:
+    screen_manager : screen_manager
 
 
-<BoxLayout1>
-    name: "main"
-    BoxLayout
+    ScreenManager:
+        id: screen_manager
+        home: home
 
+        Screen:
+            id: home
+            name: "home"
+            MDCard:
+                size_hint: None, None
+                size: 400, 500
+                pos_hint: {"center_x":  0.5, "center_y": 0.5}
+                elevation: 10
+                padding: 10
+                spacing:20
+                orientation: 'vertical'
 
-        orientation: "vertical"
-        Label:
-            text: "John Doe"
+                MDLabel:
+                    id: welcome_label
+                    text: "WELCOME"
+                    font_size: 40
+                    halign: "center"
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    padding_y: 15
 
-        BoxLayout:
-            Button:
-                text: "Schedule A"
-                disabled: root.empty_task
-                on_release:
-                    root.manager.transition.direction = "left"
-                    app.root.current = "tasksList"
-            Label:
-                text:root.my_text
-                size_hint: 0.2, 1
-                font_name: "fonts/Lcd.ttf"
+                MDTextField:
+                    id:user
+                    hint_text:"Username"
+                    icon_left: "account"
+                    size_hint_x: None
+                    width: 300
+                    font_size: 14
+                    pos_hint: {"center_x": 0.5}
 
-            Button:
-                text: "Add Task"
-                size_hint: 0.2, 1
-                on_press: root.clicked()
-                on_press: app.root.current = "taskView"
-        BoxLayout:
+                MDTextField:
+                    id:password
+                    hint_text:"password"
+                    icon_left: "eye-off"
+                    size_hint_x: None
+                    width: 300
+                    font_size: 14
+                    pos_hint: {"center_x": 0.5}
+                    password: True
 
-            Button:
-                text: "Schedule B"
-                disabled: root.empty_task
-                on_release:
-                    root.manager.transition.direction = "left"
-                    app.root.current = "taskView"
-            Label:
-                text:root.my_text
-                size_hint: 0.2, 1
-                font_name: "fonts/Lcd.ttf"
+                MDRoundFlatButton:
+                    text: "LOG IN"
+                    font_size: 12
+                    size_hint_x: 0.6
+                    pos_hint: {"center_x": 0.5}
+                    on_press:screen_manager.current = "logged"
 
-            Button:
-                text: "Add Task"
-                size_hint: 0.2, 1
-                on_press: root.clicked()
-        BoxLayout:
+                MDRoundFlatButton:
+                    text: "CLEAR"
+                    size_hint_x: 0.6
+                    font_size: 12
+                    pos_hint: {"center_x": 0.5}
+                    on_press: app.clear()
 
-            Button:
-                text: "Schedule C"
-                disabled: root.empty_task
-                on_release:
-                    root.manager.transition.direction = "left"
-                    app.root.current = "taskView"
-            Label:
-                text:root.my_text
-                size_hint: 0.2, 1
-                font_name: "fonts/Lcd.ttf"
+        Screen:
+            id:logged
+            name: "logged"
 
-            Button:
-                text: "Add Task"
-                size_hint: 0.2, 1
-                on_press: root.clicked()
+            MDLabel:
+                text: "Current Schedules"
+                halign: "center"
+                pos_hint: {"center_x": 0.5, "center_y": 0.9}
 
-
-
-<ScheduleView>
-    name:"taskView"
-    Label:
-        text: "You have this many task to complete"
-    Button:
-        text: "Go back"
-        on_release:
-            root.manager.transition.direction = "right"
-            app.root.current = "main"
-
-
-<Tasks>
-    name: "tasksList"
-    BoxLayout:
-        orientation: "vertical"
-        BoxLayout:
-            size_hint:1, 0.25
-            Label:
-                text: "These are the tasks for this schedule:"
-
-        BoxLayout:
-            orientation: "vertical"
-            Button:
-                on_release:
-                    app.root.current = "addTask"
-            Button:
-                text: "Not assigned"
-                on_release:root.date_picker()
-            Button:
-                text: "Not assigned"
-                on_release:root.date_picker()
-            Button:
-                text: "Not assigned"
-                on_release:root.date_picker()
-            Button:
-                text: "Back"
-                on_release:
-                    root.manager.transition.direction = "right"
-                    app.root.current = "main"
-
-
-<AddTask>
-    name:"addTask"
-    BoxLayout:
-        orientation: "vertical"
-        BoxLayout:
-            orientation: "vertical"
-            Label:
-                text: "Enter Task Name"
-            TextInput:
+            MDRaisedButton:
+                text: "Test"
+                pos_hint: {"center_x": 0.5, "center_y": 0.7}
                 size_hint: 1, 0.2
-            Label:
-                text: "Enter Task Due Date"
-            TextInput:
-                id: task_dd
+                md_bg_color: app.theme_cls.primary_dark
+                on_press:screen_manager.current = "s1_list"
+
+
+            MDRaisedButton:
+                text: "Test2"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
                 size_hint: 1, 0.2
-        BoxLayout:
-            orientation: "vertical"
-            size_hint: 1, 0.4
-            Button:
-                text: "Done"
-            Button:
-                text: "Back"
-                on_release:
-                    app.root.current = "tasksList"
-                on_release:
-                    root.manager.transition.direction = "left"
-                    app.root.current = "taskView"
-            Label:
-                text:root.my_text
-                size_hint: 0.2, 1
-                font_name: "fonts/Lcd.ttf"
+                md_bg_color: app.theme_cls.primary_light
+                on_press:screen_manager.current = "schedule2"
 
-            Button:
-                text: "Add Task"
-                size_hint: 0.2, 1
-                on_press: root.clicked()
-        BoxLayout:
+            MDRaisedButton:
+                text: "Test3"
+                pos_hint: {"center_x": 0.5, "center_y": 0.3}
+                size_hint: 1, 0.2
+                md_bg_color: app.theme_cls.primary_dark
 
-            Button:
-                text: "Schedule C"
-                disabled: root.empty_task
-                on_release:
-                    root.manager.transition.direction = "left"
-                    app.root.current = "taskView"
-            Label:
-                text:root.my_text
-                size_hint: 0.2, 1
-                font_name: "fonts/Lcd.ttf"
+            MDRaisedButton:
+                text: "Test4"
+                pos_hint: {"center_x": 0.5, "center_y": 0.1}
+                size_hint: 1, 0.2
+                md_bg_color: app.theme_cls.primary_light
 
-            Button:
-                text: "Add Task"
-                size_hint: 0.2, 1
-                on_press: root.clicked()
+        Screen:
+            id: s1_list
+            name: "s1_list"
+
+            MDScrollView:
+
+                MDList:
+                    id: list_id
+
+                    ThreeLineIconListItem:
+                        text: "Three-line item with avatar"
+                        secondary_text: "Secondary text here"
+                        tertiary_text: "fit more text than usual"
+
+                        IconLeftWidget:
+                            icon: "gitlab"
 
 
+                    OneLineAvatarIconListItem:
+                        on_release:app.date_picker(self)
 
-<ScheduleView>
-    name:"taskView"
-    Label:
-        text: "You have this many task to complete"
-    Button:
-        text: "Go back"
-        on_release:
-            root.manager.transition.direction = "right"
-            app.root.current = "main"
+                        IconLeftWidget:
+                            icon: "gitlab"
+
+                    OneLineAvatarIconListItem:
+                        id:testing
+
+                        on_release: app.date_picker(self)
+
+
+                        IconLeftWidget:
+                            icon: "github"
+
+                    OneLineAvatarIconListItem:
+                        on_release: print("Click 2!")
+
+                        IconLeftWidget:
+                            icon: "gitlab"
+
+                    OneLineAvatarIconListItem:
+                        on_release: print("Click!")
+
+                        IconLeftWidget:
+                            icon: "github"
+
+                    OneLineAvatarIconListItem:
+                        on_release: print("Click 2!")
+
+                        IconLeftWidget:
+                            icon: "gitlab"
+
+        Screen:
+            id:datainsert
+            name:"datainsert"
+            MDCard:
+                size_hint: None, None
+                size: 400, 500
+                pos_hint: {"center_x":  0.5, "center_y": 0.5}
+                elevation: 10
+                padding: 10
+                spacing:20
+                orientation: 'vertical'
+
+                MDLabel:
+                    id: welcome_label
+                    text: "Adding a task"
+                    font_size: 40
+                    halign: "center"
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    padding_y: 15
+
+                MDTextField:
+                    id:taskdecrip
+                    hint_text:"Task Name"
+                    icon_left: "tooltip-edit"
+                    size_hint_x: None
+                    width: 300
+                    font_size: 14
+                    pos_hint: {"center_x": 0.5}
+
+                MDIconButton:
+                    id: taskclock
+                    icon: "calendar-clock"
+                    size_hint_x: 0.2
+                    pos_hint: {"center_x": 0.2}
+                    md_bg_color: app.theme_cls.primary_light
+                    on_press:app.date_picker()
+
+
+                MDTextField:
+                    id:duedate
+                    hint_text:"Due Date"
+                    icon_left: "clock-time-nine"
+                    size_hint_x: None
+                    width: 300
+                    font_size: 14
+                    pos_hint: {"center_x": 0.5}
+
+                MDRoundFlatButton:
+                    id: boton
+                    text: "Add"
+                    font_size: 12
+                    size_hint_x: 0.6
+                    pos_hint: {"center_x": 0.5}
+                    on_press: app.submit()
+
+
+
+                MDRoundFlatButton:
+                    text: "Cancel"
+                    size_hint_x: 0.6
+                    font_size: 12
+                    pos_hint: {"center_x": 0.5}
+                    on_press: app.show_record()
+
+        Screen:
+            id:schedule2
+            name: "schedule2"
+
+            MDScrollView:
+
+                MDList:
+                    id: container2
+
+            MDIconButton:
+                icon: "plus"
+                on_press: screen_manager.current = "datainsert"
